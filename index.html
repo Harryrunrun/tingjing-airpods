@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101c20"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="听境">
+<meta name="description" content="为 AirPods 准备的三档滑块，通过你在 iPhone 上配置的快捷指令切换通透、自适应和降噪。">
+<title>听境 · AirPods 控制</title>
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon-192.png"><link rel="stylesheet" href="./styles.css?v=2">
+</head>
+<body>
+<main class="app">
+<header class="header">
+  <a class="brand" href="./" aria-label="听境首页"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span>听境</span></a>
+  <button class="icon-button" id="open-settings" aria-label="打开配置与使用说明"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></svg></button>
+</header>
+<section class="intro"><p class="eyebrow">AIRPODS PRO 3</p><h1>世界，听多少<br>由你决定。</h1><p class="intro-note">通透、自适应、降噪，轻轻一滑。</p></section>
+<section class="control-card" aria-label="聆听模式控制">
+  <div class="card-top"><span class="micro-label">准备切换为</span><span class="chip">三档控制</span></div>
+  <div class="soundscape" id="soundscape" data-mode="adaptive" aria-hidden="true">
+    <div class="sound-orbit orbit-one"></div><div class="sound-orbit orbit-two"></div><div class="sound-orbit orbit-three"></div>
+    <div class="sound-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="mode-title"><h2 id="mode-name">自适应</h2><p id="mode-description">随环境变化，平衡安静与周围的声音。</p></div>
+  <div class="slider-wrap">
+    <label class="sr-only" for="mode-slider">选择聆听模式</label>
+    <div class="slider-channel" id="slider-channel" style="--slider-position:0.5">
+      <div class="channel-stops" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="slider-motion-track" aria-hidden="true"><div class="slider-thumb"><span></span><span></span></div></div>
+      <input id="mode-slider" type="range" min="0" max="2" step="1" value="1" aria-valuetext="自适应" aria-describedby="gesture-hint">
+    </div>
+    <div class="mode-options" role="group" aria-label="也可以点选模式">
+      <button type="button" class="mode-option" data-mode="0" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4m4-7v10m5-13v16m5-13v10m4-7v4"/></svg><span>通透</span></button>
+      <button type="button" class="mode-option selected" data-mode="1" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h3l3-7 6 14 3-7h3"/></svg><span>自适应</span></button>
+      <button type="button" class="mode-option" data-mode="2" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8v8m14-8v8M9 5v14m6-14v14"/></svg><span>降噪</span></button>
+    </div>
+  </div>
+  <a class="apply-button" id="apply-mode" href="shortcuts://run-shortcut?name=AirPods%20%E8%87%AA%E9%80%82%E5%BA%94"><span id="apply-label">先配置快捷指令</span><span aria-hidden="true">↗</span></a>
+  <p class="status" id="status" role="status" aria-live="polite">首次使用，请先完成手机上的快捷指令配置。</p>
+</section>
+<div class="below-card"><span class="tiny-dot" aria-hidden="true"></span><p id="gesture-hint">自由拖动，松手吸附；配置后即可请求切换。</p></div>
+<button class="setup-link" id="setup-link"><span>首次使用 · 配置指南</span><span aria-hidden="true">→</span></button>
+<footer><p>通过 iPhone 快捷指令控制</p><p>页面显示选择的档位，无法读取耳机实际模式。</p></footer>
+</main>
+<dialog id="settings-dialog" aria-labelledby="settings-title">
+<form id="settings-form" method="dialog">
+  <div class="sheet-header"><div><p class="eyebrow">一次配置，随时切换</p><h2 id="settings-title">连接你的快捷指令</h2></div><button class="close-button" type="button" id="close-settings" aria-label="关闭配置">×</button></div>
+  <div class="setup-steps">
+    <section class="step"><span class="step-number">1</span><div><h3>先添加到 iPhone 主屏幕</h3><p>用 Safari 打开本页面，点「分享」→「添加到主屏幕」。从新出现的「听境」图标打开，再继续配置，避免重复设置。</p></div></section>
+    <section class="step"><span class="step-number">2</span><div><h3>连接 AirPods，创建三条快捷指令</h3><p>戴好并连接 AirPods。在「快捷指令」App 点「＋」，搜索「噪声控制」或「AirPods」。添加设置噪声控制模式的操作，选择你的耳机，并分别设成以下模式。</p></div></section>
+  </div>
+  <div class="shortcut-fields">
+    <div class="shortcut-row"><label for="shortcut-transparency"><strong>通透</strong><span>快捷指令名称</span></label><input id="shortcut-transparency" name="transparency" maxlength="100" required autocomplete="off" autocapitalize="off" spellcheck="false"><button class="test-button" type="button" data-test="0" aria-label="测试通透快捷指令">测试</button></div>
+    <div class="shortcut-row"><label for="shortcut-adaptive"><strong>自适应</strong><span>快捷指令名称</span></label><input id="shortcut-adaptive" name="adaptive" maxlength="100" required autocomplete="off" autocapitalize="off" spellcheck="false"><button class="test-button" type="button" data-test="1" aria-label="测试自适应快捷指令">测试</button></div>
+    <div class="shortcut-row"><label for="shortcut-cancellation"><strong>降噪</strong><span>快捷指令名称</span></label><input id="shortcut-cancellation" name="cancellation" maxlength="100" required autocomplete="off" autocapitalize="off" spellcheck="false"><button class="test-button" type="button" data-test="2" aria-label="测试降噪快捷指令">测试</button></div>
+  </div>
+  <p class="field-note">名称必须和「快捷指令」App 中完全一致。测试会尝试打开对应指令；先在快捷指令 App 内逐条运行，确认耳机真的切换了。</p>
+  <p class="sheet-status" id="sheet-status" role="status" aria-live="polite"></p>
+  <section class="step"><span class="step-number">3</span><div><h3>确认实际切换，然后保存</h3><p>三条指令都能改变耳机模式后，回到主屏幕上的「听境」，勾选下面的配置完成选项并保存。</p></div></section>
+  <div class="preferences">
+    <label class="check-row"><input id="configured" type="checkbox"><span>三条指令已创建，并已在手机上测试通过</span></label>
+    <label class="check-row"><input id="auto-apply" type="checkbox" checked><span>拖动松手或点选档位时立即请求切换</span></label>
+  </div>
+  <button class="save-button" type="submit">保存配置</button>
+  <details><summary>使用时遇到问题？</summary><div class="help-body">
+    <p><strong>松手没有反应：</strong>直接点「应用」按钮。Safari 可能要求点按确认，或切换到「快捷指令」App。</p>
+    <p><strong>提示找不到快捷指令：</strong>核对这里的名称、空格与符号；耳机名称需要在快捷指令的操作里选择。</p>
+    <p><strong>找不到噪声控制操作或自适应选项：</strong>先佩戴、连接 AirPods，再搜索。如果仍未出现，这台手机暂时无法使用相应档位，不能仅靠本页面补上接口。</p>
+    <p><strong>切换后怎样回来：</strong>手动返回「听境」。当前没有承诺自动回跳；页面也不能确认蓝牙连接和实际执行结果。</p>
+    <p><strong>想连续调节：</strong>系统设置 → 你的 AirPods → 自适应音频，可调允许的环境声音。具体位置随 iOS 版本变化；本 App 提供三个模式档位。</p>
+    <p><strong>配置保存：</strong>只保存在当前浏览器。首次从主屏幕打开时如未带入配置，请重新保存；这里不会上传耳机名称或控制记录。</p>
+  </div></details>
+  <div class="source-links"><a href="https://support.apple.com/zh-cn/guide/shortcuts/apd624386f42/ios" target="_blank" rel="noopener">快捷指令调用说明 ↗</a><a href="https://support.apple.com/zh-cn/guide/airpods/dev6d977ff21/web" target="_blank" rel="noopener">苹果自适应音频说明 ↗</a></div>
+</form>
+</dialog>
+<script type="module" src="./app.js?v=2"></script>
+</body>
+</html>

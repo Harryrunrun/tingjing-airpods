@@ -1,2 +1,33 @@
-# tingjing-airpods
-AirPods listening-mode controller for iPhone: smooth drag, release to snap, and Shortcuts integration.
+# 听境 · AirPods 控制
+
+面向 iPhone 主屏幕的轻量网页 App，提供通透、自适应、降噪三个档位。
+
+## 交互
+
+- 加大的滑钮沿宽通道连续跟手，松手后吸附到最近的档位。
+- 拖动期间不执行快捷指令，松手后只发出一次切换请求。
+- 支持直接点选、手动应用、键盘及原生辅助功能调整。
+
+## 手机配置
+
+1. 在 iPhone Safari 打开已发布的网页，分享 → 添加到主屏幕，然后从新图标进入。
+2. 戴好并连接 AirPods，在「快捷指令」中创建三条指令，搜索“噪声控制”，为每条选择你的耳机和对应模式。
+3. 默认名称分别是 `AirPods 通透`、`AirPods 自适应`、`AirPods 降噪`，也可在网页设置中填写自己的名称。
+4. 逐条运行确认有效，然后回到网页设置，勾选配置完成并保存。
+
+从其他域名迁移时，系统快捷指令不需要重建；网页配置属于浏览器本地数据，需要在新地址重新保存。
+
+## 范围与隐私
+
+网页通过 iOS 的 `shortcuts://` URL 调用本机指令，执行时可能切换到快捷指令 App。本项目不提供连续降噪强度控制，不能读取耳机的蓝牙连接状态或真实模式。
+
+快捷指令名称和选项仅保存于当前浏览器的 localStorage，没有应用后端、账户系统、分析脚本或配置上传功能。访问者不能通过这个网页控制他人的耳机。
+
+## GitHub Pages
+
+项目无需构建。发布源设置为 `main` 分支的 `/(root)`。`.nojekyll` 保留静态文件原样发布。所有资源使用相对路径，支持仓库子路径部署。
+
+## 参考
+
+- [Apple：通过 URL 运行快捷指令](https://support.apple.com/zh-cn/guide/shortcuts/apd624386f42/ios)
+- [Apple：AirPods 聆听模式设置](https://support.apple.com/zh-cn/guide/airpods/dev6d977ff21/web)
